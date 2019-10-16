@@ -60,18 +60,18 @@ class Money:
         Should use the currency symbol if available, else use the code.
         Use the currency digits to determine number of digits to show.
         """
-        # print(f"{self.currency.symbol}{self.amount}{len(self.currency.digits)}")
         if self.currency.symbol:
             if int == type(self.amount):
                 return f"{self.currency.symbol}{self.amount}.{self.currency.digits * '0'}"
             elif float == type(self.amount):
-                pass
+                poop = str(self.amount)
+                big_poop = f"{poop}{self.currency.digits * '0'}"
+                return f"{self.currency.code} {big_poop[:self.currency.digits +2]}"
+
         elif not self.currency.symbol:
             poop = str(self.amount)
             big_poop = f"{poop}{self.currency.digits * '0'}"
             return f"{self.currency.code} {big_poop[:self.currency.digits +2]}"
-            # return f"{self.currency.symbol}{self.amount}{self.currency.digits * '0'}")
-        # pass
 
     def __repr__(self):
         return f"<Money {str(self)}>"
@@ -81,7 +81,6 @@ class Money:
         All fields must be equal to for the objects to be equal.
         """
 
-
         return (type(self) == type(other) and self.amount == other.amount and
                 self.currency == other.currency)
 
@@ -90,23 +89,34 @@ class Money:
         Add two money objects of the same currency. If they have different
         currencies, raise a DifferentCurrencyError.
         """
-        pass
+        if self.currency.code == other.currency.code:
+            self.amount += other.amount
+            return self
+        else:
+            raise DifferentCurrencyError("you cute")
+            # return exception
 
     def sub(self, other):
         """
         Subtract two money objects of the same currency. If they have different
         currencies, raise a DifferentCurrencyError.
         """
-        pass
+        if self.currency.code == other.currency.code:
+            self.amount -= other.amount
+            return self
+        else:
+            raise DifferentCurrencyError("you sweet")
 
     def mul(self, multiplier):
         """
         Multiply a money object by a number to get a new money object.
         """
-        pass
+        self.amount *= multiplier
+        return self
 
     def div(self, divisor):
         """
         Divide a money object by a number to get a new money object.
         """
-        pass
+        self.amount /= divisor
+        return self
