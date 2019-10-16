@@ -18,13 +18,18 @@ class Currency:
         - symbol - optional symbol used to designate currency
         - digits -- number of significant digits used
         """
-        pass
+        self.name = name
+        self.code = code
+        self.symbol = symbol
+        self.digits = digits
+        # pass
 
     def __str__(self):
         """
         Should return the currency code, or code with symbol in parentheses.
         """
-        pass
+        return code and "(${self.symbol})"
+        # pass
 
     def __eq__(self, other):
         """
@@ -46,14 +51,27 @@ class Money:
         - amount -- quantity of currency
         - currency -- type of currency
         """
-        pass
+        self.amount = amount
+        self.currency = currency
+        # pass
 
     def __str__(self):
         """
         Should use the currency symbol if available, else use the code.
         Use the currency digits to determine number of digits to show.
         """
-        pass
+        # print(f"{self.currency.symbol}{self.amount}{len(self.currency.digits)}")
+        if self.currency.symbol:
+            if int == type(self.amount):
+                return f"{self.currency.symbol}{self.amount}.{self.currency.digits * '0'}"
+            elif float == type(self.amount):
+                pass
+        elif not self.currency.symbol:
+            poop = str(self.amount)
+            big_poop = f"{poop}{self.currency.digits * '0'}"
+            return f"{self.currency.code} {big_poop[:self.currency.digits +2]}"
+            # return f"{self.currency.symbol}{self.amount}{self.currency.digits * '0'}")
+        # pass
 
     def __repr__(self):
         return f"<Money {str(self)}>"
@@ -62,6 +80,7 @@ class Money:
         """
         All fields must be equal to for the objects to be equal.
         """
+
 
         return (type(self) == type(other) and self.amount == other.amount and
                 self.currency == other.currency)
