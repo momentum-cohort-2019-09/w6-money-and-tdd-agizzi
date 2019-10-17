@@ -93,7 +93,7 @@ class Money:
             self.amount += other.amount
             return self
         else:
-            raise DifferentCurrencyError("you cute")
+            raise DifferentCurrencyError("oops! error")
             # return exception
 
     def sub(self, other):
@@ -105,7 +105,7 @@ class Money:
             self.amount -= other.amount
             return self
         else:
-            raise DifferentCurrencyError("you sweet")
+            raise DifferentCurrencyError("oops! error")
 
     def mul(self, multiplier):
         """
